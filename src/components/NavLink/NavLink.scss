@@ -1,0 +1,200 @@
+.navlink-top {
+  background: $red;
+  padding: 10px 0;
+  &__innner {
+    @include flex(row, space-between, center);
+
+    .location {
+      @include flex(row, center, center);
+      gap: 10px;
+      color: white;
+      cursor: pointer;
+    }
+
+    ul {
+      margin-left: 50px;
+      @include flex(row, start, center);
+      gap: 50px;
+      width: 100%;
+      li {
+        a {
+          color: white;
+          text-transform: capitalize;
+        }
+      }
+
+      @media (max-width: 1070px) {
+        gap: 30px;
+      }
+
+      @media (max-width: 992px) {
+        display: none;
+      }
+    }
+
+    & > a {
+      @include flex(row, center, center);
+      gap: 10px;
+      color: white;
+    }
+  }
+}
+.navlink-bottom {
+  &__inner {
+    @include flex(row, space-between, center);
+
+    .navlink-logo {
+      font-size: 64px;
+      font-weight: 900;
+      @media (max-width: 530px) {
+        font-size: 44px;
+      }
+      @media (max-width: 372px) {
+        font-size: 34px;
+      }
+    }
+    .navlink-search {
+      position: relative;
+      & > input {
+        width: 500px;
+        height: 50px;
+        border: 2px solid $red;
+        outline: 0;
+        border-radius: 10px;
+        padding: 0 50px;
+        font-size: 17px;
+        transition: 0.3s;
+        font-weight: 500;
+        &::placeholder {
+          font-size: 16px;
+        }
+        @media (max-width: 1065px) {
+          width: 300px;
+        }
+        @media (max-width: 860px) {
+          width: 100%;
+        }
+      }
+      .navlink-focus-btn {
+        box-shadow: 0 0 5px 2px $red;
+      }
+      .navlink-search__btn {
+        @include pos-left(13px, 15px);
+        font-size: 24px;
+        fill: $red;
+      }
+      .navlink-clear-btn {
+        @include pos-right(13px, 15px);
+        font-size: 24px;
+        fill: $red;
+        cursor: pointer;
+      }
+
+      @media (max-width: 860px) {
+        margin-top: 10px;
+        order: 3;
+        width: 100%;
+      }
+    }
+
+    & > ul {
+      @include flex(row, center, center);
+      gap: 25px;
+      li {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 2px solid $red;
+        width: 70px;
+        border-radius: 5px;
+        padding-top: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+        svg {
+          width: 25px;
+          height: 25px;
+          fill: $red;
+        }
+        span {
+          font-weight: 500;
+          @media (max-width: 450px) {
+            display: none;
+          }
+        }
+        &:hover {
+          box-shadow: 0 0 5px 2px $red;
+        }
+        @media (max-width: 450px) {
+          padding: 8px 10px;
+          width: 100%;
+        }
+        @media (max-width: 372px) {
+          padding: 5px;
+        }
+      }
+      & > div {
+        padding: 8px 10px;
+        gap: 15px;
+        border: 2px solid $red;
+        border-radius: 5px;
+        @include flex(row, space-between, center);
+        cursor: pointer;
+        transition: 0.3s;
+        position: relative;
+        & > svg {
+          border-radius: 50%;
+          border: 2px solid $red;
+          width: 35px;
+          height: 35px;
+          padding: 5px;
+          fill: $red;
+        }
+        .navlink-user__name {
+          font-weight: 500;
+          @media (max-width: 450px) {
+            display: none;
+          }
+        }
+
+        .navlink-exit__btn {
+          background: $red;
+          @include pos-left(auto, -2px);
+          border-radius: 5px;
+          width: 103%;
+          text-align: center;
+          padding: 10px;
+          font-size: 22px;
+          color: white;
+          transition: all 1s;
+          @include flex(row, space-around, center);
+          @media (max-width: 450px) {
+            & > span {
+              display: none;
+            }
+          }
+        }
+
+        &:hover {
+          box-shadow: 0 0 5px 2px $red;
+        }
+
+        &:checked > .navlink-exit__btn {
+          background: blue;
+        }
+
+        @media (max-width: 450px) {
+          padding: 5px;
+          border: 0;
+        }
+      }
+    }
+
+    @media (max-width: 860px) {
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 530px) {
+      padding: 10px 0;
+    }
+  }
+}

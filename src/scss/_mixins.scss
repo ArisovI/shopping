@@ -1,0 +1,23 @@
+@mixin flex($fd, $jc, $ai) {
+  display: flex;
+  flex-direction: $fd;
+  justify-content: $jc;
+  align-items: $ai;
+}
+@mixin font-family($fs, $lh, $fw, $color) {
+  font-family: "Montserrat", Arial, Helvetica, sans-serif;
+  font-size: $fs;
+  line-height: $lh;
+  font-weight: $fw;
+  color: $color;
+}
+@mixin pos-right($t, $r) {
+  position: absolute;
+  top: $t;
+  right: $r;
+}
+@mixin pos-left($t, $l) {
+  position: absolute;
+  top: $t;
+  left: $l;
+}
