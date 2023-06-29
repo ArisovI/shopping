@@ -40,9 +40,11 @@
   }
 }
 .navlink-bottom {
+  box-shadow: 0 2px 20px 2px rgb(191, 191, 191);
+
   &__inner {
     @include flex(row, space-between, center);
-
+    padding: 10px 0;
     .navlink-logo {
       font-size: 64px;
       font-weight: 900;
@@ -133,21 +135,30 @@
         }
       }
       & > div {
-        padding: 8px 10px;
-        gap: 15px;
-        border: 2px solid $red;
-        border-radius: 5px;
-        @include flex(row, space-between, center);
-        cursor: pointer;
-        transition: 0.3s;
         position: relative;
-        & > svg {
-          border-radius: 50%;
+
+        .navlink-user {
+          padding: 8px 10px;
+          gap: 15px;
           border: 2px solid $red;
-          width: 35px;
-          height: 35px;
-          padding: 5px;
-          fill: $red;
+          border-radius: 5px;
+          @include flex(row, space-between, center);
+          cursor: pointer;
+          & > svg {
+            border-radius: 50%;
+            border: 2px solid $red;
+            width: 35px;
+            height: 35px;
+            padding: 5px;
+            fill: $red;
+          }
+          &:hover {
+            box-shadow: 0 0 5px 2px $red;
+          }
+          @media (max-width: 450px) {
+            padding: 5px;
+            border: 0;
+          }
         }
         .navlink-user__name {
           font-weight: 500;
@@ -157,16 +168,20 @@
         }
 
         .navlink-exit__btn {
-          background: $red;
+          cursor: pointer;
           @include pos-left(auto, -2px);
+          bottom: 0;
           border-radius: 5px;
           width: 103%;
           text-align: center;
-          padding: 10px;
+          padding: 11px 10px;
           font-size: 22px;
           color: white;
-          transition: all 1s;
+          transition: all 0.3s;
+          opacity: 0;
           @include flex(row, space-around, center);
+          visibility: hidden;
+          z-index: -1;
           @media (max-width: 450px) {
             & > span {
               display: none;
@@ -174,17 +189,13 @@
           }
         }
 
-        &:hover {
-          box-shadow: 0 0 5px 2px $red;
-        }
-
-        &:checked > .navlink-exit__btn {
-          background: blue;
-        }
-
-        @media (max-width: 450px) {
-          padding: 5px;
-          border: 0;
+        .navlink-exit__btn_animation {
+          bottom: -110%;
+          visibility: visible;
+          z-index: 1;
+          opacity: 1;
+          transition: 0.8s;
+          background: $red;
         }
       }
     }
@@ -198,3 +209,4 @@
     }
   }
 }
+

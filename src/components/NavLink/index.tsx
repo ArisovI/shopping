@@ -19,7 +19,7 @@ const NavLink = () => {
     "бесплатная доставка",
   ];
   const [searchValue, setSearchValue] = useState<string>("");
-  const [userExit, setUserExit] = useState<boolean>(false);
+  const [userExit, setUserExit] = useState<boolean>(true);
   return (
     <div className="navlink">
       <div className="navlink-top">
@@ -82,16 +82,20 @@ const NavLink = () => {
                 <FaShoppingCart />
                 <span>Cart</span>
               </li>
-              <div onClick={() => setUserExit(!userExit)}>
-                <FaUser />
-                <span className="navlink-user__name">User</span>
-
+              <div>
                 <div
-                  className="navlink-exit__btn"
-                  style={{
-                    bottom: userExit ? "-110%" : "",
-                    top: userExit ? "auto" : "0",
-                  }}
+                  className="navlink-user"
+                  onClick={() => setUserExit(!userExit)}
+                >
+                  <FaUser />
+                  <span className="navlink-user__name">User</span>
+                </div>
+                <div
+                  className={
+                    userExit
+                      ? "navlink-exit__btn"
+                      : "navlink-exit__btn navlink-exit__btn_animation"
+                  }
                 >
                   <FaRegTimesCircle />
                   <span>Exit</span>

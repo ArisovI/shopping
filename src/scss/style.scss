@@ -1,5 +1,13 @@
+
 @import "./_mixins.scss";
 @import "./_reset.scss";
 @import "./_variables.scss";
 
+//Pages
+@import "../pages/Home/Home.scss";
+
+//Components
 @import "../components/NavLink/NavLink.scss";
+@import "../components/Slider/Slider.scss";
+@import "../components/Filter/Filter.scss";
+@import "../components/ProductList/ProductList.scss";
