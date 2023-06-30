@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import { useAppDispatch } from "./hooks/hooks";
 import Auth from "./pages/Auth";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
@@ -8,7 +9,13 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound/NotFound";
 import ProductItem from "./pages/ProductItem";
 import "./scss/style.scss";
+import { getProducts } from "./store/async/productsSlice";
 const App = () => {
+  const dispatch = useAppDispatch();
+  React.useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />

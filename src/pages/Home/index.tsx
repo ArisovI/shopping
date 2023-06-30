@@ -3,13 +3,7 @@ import React from "react";
 import NavLink from "../../components/NavLink";
 import ProductList from "../../components/ProductList";
 import Slider from "../../components/Slider";
-import { useAppDispatch } from "../../hooks/useDispatch";
-import { getProducts } from "../../store/async/productsSlice";
 const Home = () => {
-  const dispatch = useAppDispatch();
-  React.useEffect(() => {
-    dispatch(getProducts());
-  }, []);
 
   return (
     <div>

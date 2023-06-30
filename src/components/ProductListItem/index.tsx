@@ -1,7 +1,9 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useAppSelector } from "../../hooks/useSelector";
+import { useAppSelector } from "../../hooks/hooks";
 import { ProductItem, ProductState } from "../../types/types";
+import { AiFillHeart } from "react-icons/ai";
+import MyButton from "../UI/button/MyButton";
 interface IProductListItem {
   element: ProductItem;
 }
@@ -17,11 +19,25 @@ const ProductListItem: React.FC<IProductListItem> = ({ element }) => {
     }
   } else {
     return (
-      <div>
+      <>
         {products.map((element: ProductItem) => (
-          <div key={element.id}>a</div>
+          <li key={element.id} className="product-list__item">
+            <span className="favorite">
+              <AiFillHeart />
+            </span>
+            <img src={element.images[0]} alt={element.images[0]} />
+            <h2 className="title">{element.title}</h2>
+            <div className="price">
+              <span className="price-discont">{element.price * 1.5} $</span>
+              <span className="price-without__discont">{element.price} $</span>
+            </div>
+            <div className="btns">
+              <MyButton>Рассрочка</MyButton>
+              <MyButton>В корзину</MyButton>
+            </div>
+          </li>
         ))}
-      </div>
+      </>
     );
   }
   return <></>;

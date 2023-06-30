@@ -1,6 +1,8 @@
 .main {
-  @include flex(row, start, center);
-  @media (max-width: 768px){
+  @include flex(row, start, start);
+  padding: 0;
+  gap: 40px;
+  @media (max-width: 768px) {
     flex-direction: column-reverse;
   }
 }

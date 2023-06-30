@@ -1,5 +1,4 @@
-import React from "react";
-import { useAppSelector } from "../../hooks/useSelector";
+import { useAppSelector } from "../../hooks/hooks";
 import { ProductItem } from "../../types/types";
 import ProductListItem from "../ProductListItem";
 
@@ -17,11 +16,13 @@ const ProductList = () => {
   }
 
   return (
-    <div>
+    <div className="product-list">
       ProductList
-      {products.map((element: ProductItem) => (
-        <ProductListItem key={element.id} element={element} />
-      ))}
+      <ul>
+        {products.map((element: ProductItem) => (
+          <ProductListItem key={element.id} element={element} />
+        ))}
+      </ul>
     </div>
   );
 };
