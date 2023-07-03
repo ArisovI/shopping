@@ -2,7 +2,7 @@ import { useAppSelector } from "../../hooks/hooks";
 import { ProductItem } from "../../types/types";
 import ProductListItem from "../ProductListItem";
 
-const ProductList = () => {
+const ProductList: React.FC = () => {
   const { products, isError, isLoading } = useAppSelector(
     (state) => state.products
   );

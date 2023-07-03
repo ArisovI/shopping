@@ -4,6 +4,7 @@
 
 //Pages
 @import "../pages/Home/Home.scss";
+@import "../pages/ProductItem/ProductItem.scss";
 
 //Components
 @import "../components/NavLink/NavLink.scss";
@@ -11,3 +12,5 @@
 @import "../components/Filter/Filter.scss";
 @import "../components/ProductList/ProductList.scss";
 @import "../components/ProductListItem/ProductListItem.scss";
+@import "../components/Footer/Footer.scss";
+@import '../components/Comment/Comment.scss';

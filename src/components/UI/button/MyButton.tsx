@@ -1,10 +1,14 @@
 import React, { ReactNode } from "react";
 type IMyButtonProps = {
   children: ReactNode;
-  onClick?: () => void;
+  onClick?: () => any;
 };
 const MyButton: React.FC<IMyButtonProps> = ({ children, onClick }) => {
-  return <button onClick={onClick}>{children}</button>;
+  return (
+    <button type="button" onClick={onClick}>
+      {children}
+    </button>
+  );
 };
 
 export default MyButton;

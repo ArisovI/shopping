@@ -11,6 +11,7 @@ import ProductItem from "./pages/ProductItem";
 import "./scss/style.scss";
 import { getProducts } from "./store/async/productsSlice";
 const App = () => {
+  
   const dispatch = useAppDispatch();
   React.useEffect(() => {
     dispatch(getProducts());

@@ -8,30 +8,40 @@
   position: relative;
   transition: 0.5s;
   overflow: hidden;
-  img {
+
+  .img {
     width: 100%;
     height: 200px;
-    transition: 0.5s;
-    object-fit: cover;
-  }
-
-  .favorite {
-    @include pos-right(0, 0);
-    svg {
-      width: 30px;
-      height: 30px;
+    position: relative;
+    img {
+      width: 100%;
+      height: 200px;
+      transition: 0.5s;
+      object-fit: cover;
+      cursor: context-menu;
+    }
+    .aboutElement {
+      @include pos-left(50%, 50%);
+      transform: translate(-50%, -50%);
+      font-size: 70px;
+      opacity: 0;
       fill: white;
+      visibility: hidden;
+      cursor: pointer;
+      transition: 0.5s;
     }
   }
-
-  &:hover img {
-    transform: scale(1.2);
+  .favorite {
+    @include pos-right(10px, 10px);
+    z-index: 2;
+    display: flex;
+    svg {
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      fill: black;
+    }
   }
-
-  &:hover {
-    box-shadow: 0 0 10px 5px #333;
-  }
-
   .title {
     margin-top: 20px;
     text-align: center;
@@ -60,5 +70,18 @@
       width: 100%;
       height: 40px;
     }
+  }
+
+  &:hover img {
+    transform: scale(1.2);
+    border-radius: 4px;
+  }
+  &:hover .aboutElement {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &:hover {
+    box-shadow: 0 0 10px 5px #333;
   }
 }

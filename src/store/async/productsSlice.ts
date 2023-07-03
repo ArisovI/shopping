@@ -13,7 +13,9 @@ export const getProducts = createAsyncThunk<
   undefined,
   { rejectValue: string }
 >("products/getProducts", async function (_, { rejectWithValue }) {
-  const response = await axios.get("https://api.escuelajs.co/api/v1/products?offset=0&limit=5");
+  const response = await axios.get(
+    "https://api.escuelajs.co/api/v1/products?offset=0&limit=10"
+  );
 
   if (response.status === 200) {
     console.log(response.data);
