@@ -42,7 +42,6 @@ const NavLink = () => {
             </a>
           </div>
         </div>
-        <div className="navlink-bottom"></div>
       </div>
       <div className="navlink-bottom">
         <div className="container">

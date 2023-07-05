@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import Comment from "../../components/Comment";
 import Footer from "../../components/Footer";
 import NavLink from "../../components/NavLink";
+import Recommendation from "../../components/Recommendation";
 import MyButton from "../../components/UI/button/MyButton";
 import { useAppSelector } from "../../hooks/hooks";
 import { ProductItem as ProductItemState } from "../../types/types";
@@ -23,7 +24,7 @@ const ProductItem = () => {
   }, []);
 
   if (id !== undefined) {
-    const productsFind: ProductItemState = products.find(
+    const productsFind = products.find(
       (element: ProductItemState) => element.id === parseInt(id)
     );
 
@@ -83,9 +84,11 @@ const ProductItem = () => {
                   <MyButton>Добавить в корзину</MyButton>
                 </div>
               </div>
+              <Recommendation />
             </div>
             <div className="productItem-comment">
               <Comment />
+              asdd
             </div>
           </div>
         </div>

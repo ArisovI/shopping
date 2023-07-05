@@ -9,12 +9,13 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound/NotFound";
 import ProductItem from "./pages/ProductItem";
 import "./scss/style.scss";
+import { getComments } from "./store/async/commentSlice";
 import { getProducts } from "./store/async/productsSlice";
 const App = () => {
-  
   const dispatch = useAppDispatch();
   React.useEffect(() => {
     dispatch(getProducts());
+    dispatch(getComments());
   }, [dispatch]);
 
   return (

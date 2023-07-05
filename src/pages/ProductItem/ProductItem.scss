@@ -1,8 +1,7 @@
 .productItem {
   margin-top: 50px;
   &-content {
-    @include flex(row, center, start);
-    gap: 50px;
+    @include flex(row, space-between, start);
     height: 100%;
     &__left {
       background: whitesmoke;
@@ -52,6 +51,7 @@
         span {
           font-size: 25px;
           font-weight: 600;
+          
         }
         ul {
           margin-top: 10px;

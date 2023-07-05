@@ -6,7 +6,20 @@ export type ProductItem = {
   images: string[];
 };
 export type ProductState = {
-  products: any[];
+  products: ProductItem[];
+  isError: null | string;
+  isLoading: boolean;
+};
+
+export type CommentsItem = {
+  id: number;
+  title: string;
+  body: string;
+  reactions: number;
+};
+
+export type CommentState = {
+  comments: CommentsItem[];
   isError: null | string;
   isLoading: boolean;
 };

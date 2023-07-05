@@ -33,6 +33,7 @@
             a {
               gap: 5px;
               @include flex(row, center, center);
+              color: $grey;
               svg {
                 font-size: 25px;
                 color: $grey;

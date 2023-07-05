@@ -1,0 +1,20 @@
+.category {
+  & > ul {
+    width: 100%;
+    @include flex(row, space-between, center);
+    // background: blue;
+    li {
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 600;
+      font-size: 25px;
+      &:hover {
+        transition: all 0.3s;
+        color: white;
+        background: $red;
+      }
+    }
+  }
+}

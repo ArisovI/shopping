@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { ProductState } from "../../types/types";
+import { ProductItem, ProductState } from "../../types/types";
 
 const initialState: ProductState = {
   products: [],
@@ -9,19 +9,16 @@ const initialState: ProductState = {
 };
 
 export const getProducts = createAsyncThunk<
-  ProductState[],
+  ProductItem[],
   undefined,
   { rejectValue: string }
 >("products/getProducts", async function (_, { rejectWithValue }) {
   const response = await axios.get(
     "https://api.escuelajs.co/api/v1/products?offset=0&limit=10"
   );
-
   if (response.status === 200) {
-    console.log(response.data);
     return response.data;
   }
-
   return rejectWithValue("error");
 });
 

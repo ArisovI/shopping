@@ -17,7 +17,6 @@ const ProductList: React.FC = () => {
 
   return (
     <div className="product-list">
-      ProductList
       <ul>
         {products.map((element: ProductItem) => (
           <ProductListItem key={element.id} element={element} />

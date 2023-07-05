@@ -1,0 +1,26 @@
+.recommendation {
+  background: whitesmoke;
+  padding: 10px 20px;
+  border-radius: 20px;
+  @include flex(column, center, center);
+  gap: 20px;
+  & > img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    border-radius: 20px;
+}
+  span {
+    color: $grey;
+  }
+  & > div {
+    width: 100%;
+    @include flex(row, space-between, center);
+    span:nth-child(1) {
+      text-decoration: line-through;
+    }
+    span {
+      font-size: 25px;
+    }
+  }
+}

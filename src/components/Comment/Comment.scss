@@ -1,0 +1,22 @@
+.comment {
+  padding: 20px;
+  border-radius: 20px;
+  margin-top: 50px;
+  background: whitesmoke;
+  & > button{
+    padding: 10px 20px;
+    background: $red;
+    color: white;
+    text-transform: uppercase;
+    border-radius: 5px;
+    border: 0;
+    margin-top: 20px;
+  }
+  ul {
+    margin-top: 20px;
+    border-top: 1px solid $grey;
+    padding-top: 20px;
+    @include flex(column, start, start);
+    gap: 20px;
+  }
+}
