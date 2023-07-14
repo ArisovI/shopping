@@ -8,9 +8,12 @@ import {
   FaSearch,
   FaRegTimesCircle,
 } from "react-icons/fa";
-import MyButton from "../UI/button/MyButton";
+import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { exitUser } from "../../store/async/authSlice";
 import MyInput from "../UI/input/MyInput";
 const NavLink = () => {
+  const dispatch = useAppDispatch();
   const arr: string[] = [
     "о нас",
     "способы оплаты",
@@ -20,6 +23,16 @@ const NavLink = () => {
   ];
   const [searchValue, setSearchValue] = useState<string>("");
   const [userExit, setUserExit] = useState<boolean>(true);
+  const { products } = useAppSelector((state) => state.products);
+  const { info, status } = useAppSelector((state) => state.auth);
+
+  const exit = () => {
+    setUserExit(!userExit);
+    dispatch(exitUser());
+    console.log(userExit);
+    
+  };
+
   return (
     <div className="navlink">
       <div className="navlink-top">
@@ -62,6 +75,34 @@ const NavLink = () => {
                   searchValue.trim().length > 0 ? "navlink-focus-btn" : ""
                 }
               />
+              {searchValue.trim().length ? (
+                <ul className="searchItems">
+                  {products
+                    .filter((element) => {
+                      if (
+                        element.title
+                          .toLowerCase()
+                          .includes(searchValue.toLowerCase())
+                      ) {
+                        return true;
+                      } else {
+                        return false;
+                      }
+                    })
+                    .map((element) => (
+                      <li key={element.id}>
+                        <Link
+                          to={`/product/${element.id}`}
+                          onClick={() => setSearchValue("")}
+                        >
+                          {element.title}
+                        </Link>
+                      </li>
+                    ))}
+                </ul>
+              ) : (
+                ""
+              )}
               {searchValue.trim().length > 0 ? (
                 <FaRegTimesCircle
                   className="navlink-clear-btn"
@@ -82,14 +123,31 @@ const NavLink = () => {
                 <span>Cart</span>
               </li>
               <div>
+                {!status ? (
+                  <Link
+                    to="auth"
+                    className="navlink-user"
+                    onClick={() => setUserExit(!userExit)}
+                  >
+                    <FaUser />
+
+                    <span className="navlink-user__name">
+                      {status ? info?.name : "User"}
+                    </span>
+                  </Link>
+                ) : (
+                  <div
+                    className="navlink-user"
+                    onClick={() => setUserExit(!userExit)}
+                  >
+                    <img src={info?.avatar} alt="" />
+                    <span className="navlink-user__name">
+                      {status ? info?.name : "User"}
+                    </span>
+                  </div>
+                )}
                 <div
-                  className="navlink-user"
-                  onClick={() => setUserExit(!userExit)}
-                >
-                  <FaUser />
-                  <span className="navlink-user__name">User</span>
-                </div>
-                <div
+                  onClick={() => exit()}
                   className={
                     userExit
                       ? "navlink-exit__btn"

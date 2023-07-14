@@ -23,3 +23,14 @@ export type CommentState = {
   isError: null | string;
   isLoading: boolean;
 };
+
+export type User = {
+  id: number;
+  avatar: string;
+  name: string;
+  password?: string;
+  role?: string;
+  creationAt?: string;
+  updatedAt?: string;
+  email: string;
+};

@@ -16,8 +16,6 @@ export const getComments = createAsyncThunk<
   const response = await axios.get("https://dummyjson.com/posts?limit=10");
 
   if (response.status === 200) {
-    console.log(response.data.posts);
-
     return response.data.posts;
   }
   return rejectWithValue("error");

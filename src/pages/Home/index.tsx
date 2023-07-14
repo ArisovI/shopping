@@ -1,5 +1,4 @@
 import Filter from "../../components/Filter";
-import React from "react";
 import NavLink from "../../components/NavLink";
 import ProductList from "../../components/ProductList";
 import Slider from "../../components/Slider";
@@ -9,10 +8,11 @@ const Home = () => {
   return (
     <div>
       <NavLink />
-      <Category />
 
       <Slider />
       <main className="main container">
+        <Category />
+
         <div className="content">
           <Filter />
           <ProductList />

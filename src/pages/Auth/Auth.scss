@@ -1,0 +1,33 @@
+.auth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.formContainer {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.input {
+  width: 300px;
+}
+.button {
+  width: 200px;
+}
+.request {
+  @include flex(row, space-between, center);
+  width: 100%;
+  cursor: pointer;
+}
+.error-alert {
+  @include pos-left(5%, 50%);
+  transform: translate(-50%, -50%);
+}
+.backToMain{
+  @include pos-left(2%, 1%);
+  
+}

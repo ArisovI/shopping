@@ -10,17 +10,23 @@ const initialState: ProductState = {
 
 export const getProducts = createAsyncThunk<
   ProductItem[],
-  undefined,
+  number,
   { rejectValue: string }
->("products/getProducts", async function (_, { rejectWithValue }) {
-  const response = await axios.get(
-    "https://api.escuelajs.co/api/v1/products?offset=0&limit=10"
-  );
-  if (response.status === 200) {
-    return response.data;
+>(
+  "products/getProducts",
+  async function (categoryId: number, { rejectWithValue }) {
+    try {
+      const response = await axios.get(
+        `https://api.escuelajs.co/api/v1/products/?offset=0&limit=10&categoryId=${categoryId}`
+      );
+      if (response.status === 200) {
+        return response.data;
+      }
+    } catch (error:any) {
+      console.log(error.message)
+    }
   }
-  return rejectWithValue("error");
-});
+);
 
 const productSlice = createSlice({
   name: "products",

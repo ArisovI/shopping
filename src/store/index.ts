@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import productsReducer from "./async/productsSlice";
-import commentSlice from "./async/commentSlice";
+import commentReducer from "./async/commentSlice";
+import authReducer from "./async/authSlice";
 export const store = configureStore({
   reducer: {
     products: productsReducer,
-    comments: commentSlice,
+    comments: commentReducer,
+    auth: authReducer
   },
 });
 

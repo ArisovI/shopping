@@ -1,6 +1,7 @@
 import { useAppSelector } from "../../hooks/hooks";
 import { ProductItem } from "../../types/types";
 import ProductListItem from "../ProductListItem";
+import { Skeleton } from "@mui/material";
 
 const ProductList: React.FC = () => {
   const { products, isError, isLoading } = useAppSelector(
@@ -8,7 +9,22 @@ const ProductList: React.FC = () => {
   );
 
   if (isLoading) {
-    return <div>Loading</div>;
+    return (
+      <div className="product-list">
+        <ul>
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((index) => (
+            <li>
+              <Skeleton
+                key={index}
+                variant="rounded"
+                height={400}
+                width={250}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
   }
 
   if (isError) {

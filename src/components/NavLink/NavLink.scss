@@ -91,6 +91,28 @@
         cursor: pointer;
       }
 
+      .searchItems{
+        @include pos-left(100%,0);
+        width: 100%;
+        z-index: 2;
+        li{
+          margin: 5px 0;
+          a{
+            background: $red;
+            border-radius: 5px;
+            width: 100%;
+            display: block;
+            padding: 5px ;
+              color: white;
+            font-size: 22px;
+            &:hover{
+              background: black;
+              transition: 0.3s;
+            }
+          }       
+        }
+      }
+
       @media (max-width: 860px) {
         margin-top: 10px;
         order: 3;
@@ -143,13 +165,14 @@
           border-radius: 5px;
           @include flex(row, space-between, center);
           cursor: pointer;
-          & > svg {
+          & > img, svg {
             border-radius: 50%;
             border: 2px solid $red;
             width: 35px;
             height: 35px;
             padding: 5px;
             fill: $red;
+
           }
           &:hover {
             box-shadow: 0 0 5px 2px $red;
