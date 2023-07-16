@@ -25,12 +25,10 @@ const NavLink = () => {
   const [userExit, setUserExit] = useState<boolean>(true);
   const { products } = useAppSelector((state) => state.products);
   const { info, status } = useAppSelector((state) => state.auth);
-
+  const { favorites } = useAppSelector((state) => state.favorites);
   const exit = () => {
     setUserExit(!userExit);
     dispatch(exitUser());
-    console.log(userExit);
-    
   };
 
   return (
@@ -59,9 +57,9 @@ const NavLink = () => {
       <div className="navlink-bottom">
         <div className="container">
           <div className="navlink-bottom__inner">
-            <a href="#" className="navlink-logo">
+            <Link className="navlink-logo" to="/">
               LOGO
-            </a>
+            </Link>
             <div className="navlink-search">
               <FaSearch className="navlink-search__btn" />
               <MyInput
@@ -115,17 +113,22 @@ const NavLink = () => {
 
             <ul>
               <li>
-                <FaHeart />
-                <span>Favorite</span>
+                <Link to="/favorite">
+                  <span className="favorite-length">{favorites.length}</span>
+                  <FaHeart />
+                  <span>Favorite</span>
+                </Link>
               </li>
               <li>
-                <FaShoppingCart />
-                <span>Cart</span>
+                <Link to="/cart">
+                  <FaShoppingCart />
+                  <span>Cart</span>
+                </Link>
               </li>
               <div>
                 {!status ? (
                   <Link
-                    to="auth"
+                    to="/auth"
                     className="navlink-user"
                     onClick={() => setUserExit(!userExit)}
                   >

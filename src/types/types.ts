@@ -4,6 +4,7 @@ export type ProductItem = {
   price: number;
   description: string;
   images: string[];
+  favorites: boolean
 };
 export type ProductState = {
   products: ProductItem[];

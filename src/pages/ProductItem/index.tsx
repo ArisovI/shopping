@@ -88,7 +88,7 @@ const ProductItem = () => {
             </div>
             <div className="productItem-comment">
               <Comment />
-              asdd
+         
             </div>
           </div>
         </div>

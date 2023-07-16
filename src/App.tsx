@@ -13,7 +13,7 @@ import { getToken } from "./store/async/async";
 import { getComments } from "./store/async/commentSlice";
 const App = () => {
   const dispatch = useAppDispatch();
-  const { status, info } = useAppSelector((state) => state.auth);
+  const { status } = useAppSelector((state) => state.auth);
   React.useEffect(() => {
     dispatch(getComments());
     dispatch(getToken());
@@ -22,11 +22,11 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="auth" element={<Auth />} />
-      <Route path="cart" element={<Cart />} />
-      <Route path="favorite" element={<Favorite />} />
-      <Route path="product/:id" element={<ProductItem />} />
-      <Route path="checkout" element={<Checkout />} />
+      <Route path="/auth" element={<Auth />} />
+      <Route path="/cart" element={<Cart />} />
+      <Route path="/favorite" element={<Favorite />} />
+      <Route path="/product/:id" element={<ProductItem />} />
+      <Route path="/checkout" element={<Checkout />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

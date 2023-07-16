@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { ProductItem } from "../../types/types";
 
 export const getToken = createAsyncThunk<any>("token/getToken", async () => {
   try {
@@ -40,3 +41,32 @@ export const getUser = createAsyncThunk<
     console.log(error.message);
   }
 });
+
+interface categoryAndFilter {
+  value: number[];
+  categoryId: number;
+}
+
+export const getProducts = createAsyncThunk<
+  ProductItem[],
+  categoryAndFilter,
+  { rejectValue: string }
+>(
+  "products/getProducts",
+  async function (categoryAndFilter: categoryAndFilter) {
+    const { categoryId, value } = categoryAndFilter;
+    try {
+      const response = await axios.get(
+        `https://api.escuelajs.co/api/v1/products/?offset=0&limit=10&categoryId=${categoryId}&price_min=${value[0]}&price_max=${value[1]}`
+      );
+      if (response.status === 200) {
+        const changeData = response.data.map((element: ProductItem) => {
+          return { ...element, favorites: false };
+        });
+        return changeData;
+      }
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  }
+);

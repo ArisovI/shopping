@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useAppDispatch } from "../../hooks/hooks";
-import { getProducts as fetchProducts } from "../../store/async/productsSlice";
+import { getProducts as fetchProducts} from "../../store/async/async";
 const Category = () => {
   const dispatch = useAppDispatch();
   const [categoryId, setCategoryId] = useState<number>(0);
 
   React.useEffect(() => {
-    dispatch(fetchProducts(categoryId));
+    dispatch(fetchProducts({ categoryId, value: [0, 1000] }));
   }, [dispatch, categoryId]);
+
   const categoryArr: string[] = [
     "Все категории",
     "Electronics",
@@ -18,7 +19,6 @@ const Category = () => {
 
   const changeCategoryId = (index: number) => {
     setCategoryId(index);
-    window.scrollTo(0, 700);
   };
 
   return (
@@ -39,6 +39,3 @@ const Category = () => {
 };
 
 export default Category;
-function getProducts(): any {
-  throw new Error("Function not implemented.");
-}

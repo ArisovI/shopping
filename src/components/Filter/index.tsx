@@ -7,10 +7,14 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
+import { useAppDispatch } from "../../hooks/hooks";
+import { getProducts } from "../../store/async/async";
 import MyButton from "../UI/button/MyButton";
 import MyInput from "../UI/input/MyInput";
 
 const Filter = () => {
+  const dispatch = useAppDispatch();
+  const [isFilter, setIsFilter] = useState<Boolean>(false);
   const initialSliderValue = [0, 1000];
   const [value, setValue] = useState<number[]>(initialSliderValue);
   const [checkboxValues, setCheckboxValues] = useState({
@@ -37,6 +41,16 @@ const Filter = () => {
       installment: false,
       freeDelivery: false,
     });
+    dispatch(getProducts({ value: [0, 1000], categoryId: 0 }));
+  };
+
+  const handleFilter = () => {
+    setIsFilter(true);
+    dispatch(getProducts({ value, categoryId: 0 }));
+
+    setTimeout(() => {
+      setIsFilter(false);
+    }, 1000);
   };
 
   return (
@@ -90,7 +104,7 @@ const Filter = () => {
       </FormGroup>
       <div className="filter-bottom__btn">
         <MyButton onClick={handleReset}>Сброс</MyButton>
-        <MyButton>Фильтр</MyButton>
+        <MyButton onClick={handleFilter}>Фильтр</MyButton>
       </div>
     </div>
   );

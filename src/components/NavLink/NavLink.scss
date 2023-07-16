@@ -91,25 +91,25 @@
         cursor: pointer;
       }
 
-      .searchItems{
-        @include pos-left(100%,0);
+      .searchItems {
+        @include pos-left(100%, 0);
         width: 100%;
         z-index: 2;
-        li{
+        li {
           margin: 5px 0;
-          a{
+          a {
             background: $red;
             border-radius: 5px;
             width: 100%;
             display: block;
-            padding: 5px ;
-              color: white;
+            padding: 5px;
+            color: white;
             font-size: 22px;
-            &:hover{
+            &:hover {
               background: black;
               transition: 0.3s;
             }
-          }       
+          }
         }
       }
 
@@ -124,35 +124,48 @@
       @include flex(row, center, center);
       gap: 25px;
       li {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        border: 2px solid $red;
-        width: 70px;
-        border-radius: 5px;
-        padding-top: 5px;
-        cursor: pointer;
-        transition: 0.3s;
-        svg {
-          width: 25px;
-          height: 25px;
-          fill: $red;
-        }
-        span {
-          font-weight: 500;
-          @media (max-width: 450px) {
-            display: none;
+        a {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          border: 2px solid $red;
+          width: 70px;
+          border-radius: 5px;
+          padding-top: 5px;
+          cursor: pointer;
+          transition: 0.3s;
+          position: relative;
+          .favorite-length{
+            @include pos-right(-10px, -10px);
+            border-radius: 50%;
+            background: $red;
+            color: white;
+            width: 25px;
+            height: 25px;
+            @include flex(row, center, center);
           }
-        }
-        &:hover {
-          box-shadow: 0 0 5px 2px $red;
-        }
-        @media (max-width: 450px) {
-          padding: 8px 10px;
-          width: 100%;
-        }
-        @media (max-width: 372px) {
-          padding: 5px;
+          svg {
+            width: 25px;
+            height: 25px;
+            fill: $red;
+          }
+          span {
+            font-weight: 500;
+            color: black;
+            @media (max-width: 450px) {
+              display: none;
+            }
+          }
+          &:hover {
+            box-shadow: 0 0 5px 2px $red;
+          }
+          @media (max-width: 450px) {
+            padding: 8px 10px;
+            width: 100%;
+          }
+          @media (max-width: 372px) {
+            padding: 5px;
+          }
         }
       }
       & > div {
@@ -165,14 +178,15 @@
           border-radius: 5px;
           @include flex(row, space-between, center);
           cursor: pointer;
-          & > img, svg {
+          color: black;
+          & > img,
+          svg {
             border-radius: 50%;
             border: 2px solid $red;
             width: 35px;
             height: 35px;
             padding: 5px;
             fill: $red;
-
           }
           &:hover {
             box-shadow: 0 0 5px 2px $red;
@@ -231,4 +245,3 @@
     }
   }
 }
-

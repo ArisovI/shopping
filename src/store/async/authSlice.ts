@@ -13,7 +13,7 @@ const initialState = {
     avatar: "",
     email: "",
   },
-};
+  };
 
 const authSlice = createSlice({
   name: "auth",
