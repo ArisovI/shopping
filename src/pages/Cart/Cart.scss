@@ -1,0 +1,143 @@
+.cart-inner {
+  &__content {
+    display: flex;
+    position: relative;
+    gap: 20px;
+    &_products {
+      @include flex(column, start, start);
+      width: 100%;
+      gap: 20px;
+      .products {
+        width: 100%;
+        align-items: center;
+        display: flex;
+        gap: 50px;
+        padding: 15px 20px;
+        box-shadow: 0 0 3px #333;
+
+        border-radius: 10px;
+        & > img {
+          width: 150px;
+          height: 150px;
+          border-radius: 10px;
+        }
+        &-about {
+          width: 300px;
+          height: 100%;
+          @include flex(column, center, center);
+          & > div {
+            @include flex(column, start, start);
+          }
+          span {
+            font-weight: 600;
+          }
+          h3 {
+            font-size: 25px;
+          }
+        }
+        &-btns {
+          @include flex(row, center, center);
+          gap: 20px;
+          margin-left: auto;
+          svg {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            fill: rgb(208, 214, 228);
+          }
+        }
+        &-count {
+          @include flex(row, center, center);
+          gap: 15px;
+          margin-left: auto;
+          button {
+            width: 40px;
+            height: 40px;
+            background: rgb(208, 214, 228);
+            border: 0;
+            border-radius: 10px;
+            font-size: 24px;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    &_total {
+      box-shadow: 0 0 3px #333;
+      width: 400px;
+      @include flex(column, start, start);
+      padding: 20px;
+      height: 100%;
+      position: sticky;
+      border-radius: 8px;
+      top: 0;
+      ul {
+        display: flex;
+        margin-top: 20px;
+        flex-direction: column;
+        width: 100%;
+        gap: 20px;
+        li {
+          display: flex;
+          flex-direction: column;
+          & > span {
+            font-weight: 700;
+            font-size: 18px;
+            text-align: center;
+          }
+          & > div {
+            @include flex(row, space-between, center);
+            span {
+              font-size: 15px;
+              font-weight: 600;
+            }
+          }
+        }
+      }
+      & > div {
+        display: flex;
+        flex-direction: column;
+        border-top: 1px solid rgb(192, 192, 192);
+        padding-top: 10px;
+        margin-top: 20px;
+        width: 100%;
+        gap: 10px;
+        & > div {
+          @include flex(row, space-between, center);
+        }
+        & > button {
+          width: 50%;
+          margin: 0 auto;
+          padding: 10px;
+          background: $red;
+          border: 0;
+          border-radius: 5px;
+          font-size: 18px;
+          color: white;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+
+  &__title {
+    padding: 20px 0;
+    @include flex(row, space-between, center);
+    h2{
+      font-size: 32px;
+    }
+    & > button {
+      font-size: 18px;
+      background: 0;
+      font-weight: 500;
+      color: $grey;
+      border: 0;
+      @include flex(row, center, center);
+      gap: 10px;
+      &:hover {
+        color: $red;
+      }
+    }
+  }
+}

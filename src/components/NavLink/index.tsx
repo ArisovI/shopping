@@ -26,6 +26,7 @@ const NavLink = () => {
   const { products } = useAppSelector((state) => state.products);
   const { info, status } = useAppSelector((state) => state.auth);
   const { favorites } = useAppSelector((state) => state.favorites);
+  const { cart } = useAppSelector((state) => state.cart);
   const exit = () => {
     setUserExit(!userExit);
     dispatch(exitUser());
@@ -114,13 +115,22 @@ const NavLink = () => {
             <ul>
               <li>
                 <Link to="/favorite">
-                  <span className="favorite-length">{favorites.length}</span>
+                  {favorites.length > 0 ? (
+                    <span className="favorite-length">{favorites.length}</span>
+                  ) : (
+                    ""
+                  )}
                   <FaHeart />
                   <span>Favorite</span>
                 </Link>
               </li>
               <li>
                 <Link to="/cart">
+                  {cart.length > 0 ? (
+                    <span className="favorite-length">{cart.length}</span>
+                  ) : (
+                    ""
+                  )}
                   <FaShoppingCart />
                   <span>Cart</span>
                 </Link>

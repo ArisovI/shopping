@@ -7,6 +7,7 @@ import { ProductItem } from "../../types/types";
 import { AiFillDelete, AiFillHeart, AiFillInfoCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { addToFavorite, deleteAll } from "../../store/async/favoriteSlice";
+import { addToCart } from "../../store/async/cartSlice";
 const Favorite = () => {
   const dispatch = useAppDispatch();
   const { favorites } = useAppSelector((state) => state.favorites);
@@ -37,7 +38,9 @@ const Favorite = () => {
                     </span>
                   </div>
                   <div className="btns">
-                    <MyButton>Добавить в корзину</MyButton>
+                    <MyButton onClick={() => dispatch(addToCart(favorite))}>
+                      Добавить в корзину
+                    </MyButton>
                     <AiFillHeart
                       onClick={() => dispatch(addToFavorite(favorite))}
                       style={{ fill: favorite.favorites ? "red" : "black" }}
@@ -50,7 +53,7 @@ const Favorite = () => {
               ))
             ) : (
               <div className="favorite-inner__content_false">
-                <h2>Вы ничего не добавляли...</h2>
+                <h2>Вы ничего не добавляли в избранный...</h2>
                 <Link to="/">Перейти на главную страницу</Link>
               </div>
             )}

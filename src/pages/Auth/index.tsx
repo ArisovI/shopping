@@ -6,7 +6,6 @@ import {
   IconButton,
   InputAdornment,
   InputLabel,
-  makeStyles,
   OutlinedInput,
   Snackbar,
   Tab,
@@ -34,7 +33,7 @@ const Auth = () => {
       setOpen(true);
       setTimeout(() => {
         setIsError(false);
-      }, 3000);
+      }, 5000);
     }
   };
   const [value, setValue] = useState(0);
@@ -64,13 +63,12 @@ const Auth = () => {
   return (
     <div className="auth">
       {isError ? (
-        <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-          <Alert
-            className="error-alert"
-            onClose={handleClose}
-            severity="error"
-            sx={{ width: "100%" }}
-          >
+        <Snackbar
+          open={open}
+          autoHideDuration={3000}
+          onClose={handleClose}
+        >
+          <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
             Пожалуйста заполните все поля!
           </Alert>
         </Snackbar>
