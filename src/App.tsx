@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "./hooks/hooks";
+import Admin from "./pages/Admin";
 import Auth from "./pages/Auth";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
@@ -18,7 +19,7 @@ const App = () => {
     dispatch(getComments());
     dispatch(getToken());
   }, [dispatch, status]);
-      
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -28,6 +29,7 @@ const App = () => {
       <Route path="/product/:id" element={<ProductItem />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="*" element={<NotFound />} />
+      <Route path={status ? "/admin" : "/notadmin"} element={<Admin />} />
     </Routes>
   );
 };

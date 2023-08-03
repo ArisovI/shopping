@@ -14,12 +14,13 @@
         gap: 50px;
         padding: 15px 20px;
         box-shadow: 0 0 3px #333;
-
+        text-align: center;
         border-radius: 10px;
         & > img {
           width: 150px;
           height: 150px;
           border-radius: 10px;
+          object-fit: cover;
         }
         &-about {
           width: 300px;
@@ -60,6 +61,78 @@
             font-weight: 600;
           }
         }
+
+        @media (max-width: 900px) {
+          justify-content: space-between;
+          gap: 0;
+          &-about {
+            width: 169px !important;
+          }
+          &-count {
+            margin-left: 0;
+          }
+          &-btns {
+            margin-left: 0;
+          }
+
+          &-about {
+            width: auto;
+            h3 {
+              font-size: 18px;
+            }
+            span {
+              font-size: 14px;
+            }
+          }
+        }
+
+        @media (max-width: 676px) {
+          width: 100%;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 10px;
+          & > img {
+            width: 100%;
+            height: 400px;
+          }
+          &-about {
+            width: 100% !important;
+            margin-top: 10px;
+            gap: 8px;
+            @include flex(row, center, center);
+            gap: 20px;
+            h3 {
+              font-size: 26px;
+            }
+            span {
+              font-size: 17px;
+            }
+            & > div {
+              gap: 10px;
+            }
+          }
+
+          &-btns {
+            width: 48%;
+          }
+          &-count {
+            width: 48%;
+          }
+        }
+
+        @media (max-width: 576px) {
+          & > img {
+            height: 250px;
+          }
+          &-about {
+            flex-direction: column-reverse;
+          }
+
+          &-btns,
+          &-count {
+            width: 100%;
+          }
+        }
       }
     }
 
@@ -95,6 +168,14 @@
           }
         }
       }
+      @media (max-width: 1082px) {
+        width: 600px;
+        margin: 0 auto;
+      }
+
+      @media (max-width: 676px) {
+        width: 100%;
+      }
       & > div {
         display: flex;
         flex-direction: column;
@@ -106,9 +187,10 @@
         & > div {
           @include flex(row, space-between, center);
         }
-        & > button {
+        & > a {
           width: 50%;
           margin: 0 auto;
+          text-align: center;
           padding: 10px;
           background: $red;
           border: 0;
@@ -119,12 +201,16 @@
         }
       }
     }
+
+    @media (max-width: 1160px) {
+      flex-direction: column;
+    }
   }
 
   &__title {
     padding: 20px 0;
     @include flex(row, space-between, center);
-    h2{
+    h2 {
       font-size: 32px;
     }
     & > button {
@@ -137,6 +223,21 @@
       gap: 10px;
       &:hover {
         color: $red;
+      }
+      @media (max-width: 768px) {
+        font-size: 16px;
+      }
+    }
+    @media (max-width: 480px) {
+      gap: 10px;
+      h2 {
+        font-size: 24px;
+      }
+      & > button {
+        font-size: 14px;
+        svg {
+          display: none;
+        }
       }
     }
   }

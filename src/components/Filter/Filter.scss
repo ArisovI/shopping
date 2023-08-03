@@ -7,6 +7,7 @@
 
   @media (max-width: 768px) {
     width: 100%;
+    padding: 20px;
   }
 
   &-price {
@@ -29,10 +30,6 @@
       width: 250px;
       color: $red;
       margin: 0 auto;
-      @media (max-width: 768px) {
-        width: 93%;
-      }
-    
     }
   }
 
@@ -55,6 +52,28 @@
 
       &:active {
         box-shadow: 0 0px 2px 2px $red;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .filter-price {
+      &__top {
+        & > p {
+          width: 40px;
+          height: 35px;
+          font-size: 16px;
+        }
+      }
+      & > span {
+        width: 100%;
+      }
+    }
+    .filter-bottom__btn {
+      flex-direction: column;
+      & > button {
+        width: 100%;
+        margin-bottom: 10px;
       }
     }
   }

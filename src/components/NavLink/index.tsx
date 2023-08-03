@@ -11,6 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { exitUser } from "../../store/async/authSlice";
+import { deleteAllToCart } from "../../store/async/cartSlice";
 import MyInput from "../UI/input/MyInput";
 const NavLink = () => {
   const dispatch = useAppDispatch();
@@ -30,6 +31,7 @@ const NavLink = () => {
   const exit = () => {
     setUserExit(!userExit);
     dispatch(exitUser());
+    dispatch(deleteAllToCart());
   };
 
   return (

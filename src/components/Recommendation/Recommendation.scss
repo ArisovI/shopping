@@ -3,13 +3,15 @@
   padding: 10px 20px;
   border-radius: 20px;
   @include flex(column, center, center);
+  margin: 0 auto;
   gap: 20px;
+  color: black;
   & > img {
     width: 120px;
     height: 120px;
     object-fit: contain;
     border-radius: 20px;
-}
+  }
   span {
     color: $grey;
   }

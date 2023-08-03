@@ -1,0 +1,98 @@
+.checkout {
+  @include flex(column, center, center);
+  height: 100vh;
+  &-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    @include flex(column, center, center);
+    background: rgb(238, 238, 238);
+    padding: 50px;
+    border-radius: 5px;
+  }
+  &-profile {
+    margin-top: 10px;
+    &__item {
+      @include flex(row, space-between, center);
+      gap: 50px;
+      margin: 5px 0;
+      span {
+        font-size: 22px;
+        font-weight: 600;
+      }
+      input {
+        padding: 5px 10px;
+        border: 2px solid $grey;
+        border-radius: 5px;
+        outline: 0;
+        &::placeholder {
+          opacity: 0.4;
+        }
+      }
+    }
+  }
+
+  &-order {
+    width: 600px;
+    margin-top: 10px;
+    @include flex(column, center, center);
+    gap: 20px;
+    li {
+      width: 100%;
+      border: 2px solid $grey;
+      padding: 10px 25px;
+      border-radius: 8px;
+      @include flex(row, space-between, center);
+      img {
+        width: 120px;
+        height: 120px;
+      }
+      & > div {
+        @include flex(column, center, center);
+        gap: 5px;
+        font-size: 18px;
+        font-weight: 600;
+      }
+      button {
+        padding: 10px;
+        border: 0;
+        background: $red;
+        border-radius: 8px;
+        color: white;
+        font-size: 22px;
+        font-weight: 600;
+        display: flex;
+      }
+    }
+  }
+  &-totalPrice {
+    margin: 20px 0;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  &-delivery {
+    & > div {
+      label {
+        @include flex(row, space-between, center);
+        gap: 20px;
+      }
+    }
+    .span {
+      color: $grey;
+      font-weight: 600 !important;
+      font-size: 23px;
+    }
+  }
+
+  & > div {
+    > button {
+      padding: 10px 20px;
+      background: $red;
+      color: white;
+      font-size: 22px;
+      font-weight: 700;
+      border-radius: 6px;
+      border: 0;
+    }
+  }
+}

@@ -78,12 +78,14 @@ const ProductListItem: React.FC<IProductListItem> = ({ element }) => {
 
   //add to cart this.
   const addCart = () => {
-    dispatch(addToCart(element));
+    if (status) {
+      dispatch(addToCart(element));
 
-    setOpenCart(true);
-    setTimeout(() => {
-      setOpenCart(false);
-    }, 3000);
+      setOpenCart(true);
+      setTimeout(() => {
+        setOpenCart(false);
+      }, 3000);
+    }
   };
 
   //add to favorite this.

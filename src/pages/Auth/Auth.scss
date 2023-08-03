@@ -21,4 +21,8 @@
 
 .backToMain {
   @include pos-left(2%, 1%);
+  @media (max-width: 768px) {
+    left: 50%;
+    margin-left: calc(-286px / 2);
+  }
 }

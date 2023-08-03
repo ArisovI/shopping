@@ -10,7 +10,6 @@ import React, { useState } from "react";
 import { useAppDispatch } from "../../hooks/hooks";
 import { getProducts } from "../../store/async/async";
 import MyButton from "../UI/button/MyButton";
-import MyInput from "../UI/input/MyInput";
 
 const Filter = () => {
   const dispatch = useAppDispatch();

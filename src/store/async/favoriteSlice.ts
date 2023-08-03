@@ -5,8 +5,13 @@ interface FavoriteState {
   favorites: ProductItem[];
 }
 
+let checkFavorite: ProductItem[] = localStorage.getItem("favorite")
+  ? JSON.parse(localStorage.getItem("favorite") as string)
+  : [];
+
+
 const initialState = {
-  favorites: [],
+  favorites: checkFavorite,
 };
 
 const favoriteSlice = createSlice({
@@ -25,6 +30,7 @@ const favoriteSlice = createSlice({
           (element) => element.id !== action.payload.id
         );
       }
+      localStorage.setItem("favorite", JSON.stringify(state.favorites));
     },
     delteToFavorite: (state: FavoriteState, action) => {
       if (state.favorites.includes(action.payload)) {
@@ -32,11 +38,14 @@ const favoriteSlice = createSlice({
           (element) => element.id !== action.payload.id
         );
       }
+      localStorage.setItem("favorite", JSON.stringify(state.favorites));
     },
-    deleteAll: (state:FavoriteState) =>{
+    deleteAll: (state: FavoriteState) => {
       state.favorites = [];
-    }
+      localStorage.setItem("favorite", JSON.stringify(state.favorites));
+    },
   },
 });
-export const { addToFavorite, delteToFavorite, deleteAll } = favoriteSlice.actions;
+export const { addToFavorite, delteToFavorite, deleteAll } =
+  favoriteSlice.actions;
 export default favoriteSlice.reducer;

@@ -4,9 +4,12 @@ import { ProductItem } from "../../types/types";
 interface CartState {
   cart: ProductItem[];
 }
+let checkCart: ProductItem[] = localStorage.getItem("cart")
+  ? JSON.parse(localStorage.getItem("cart") as string)
+  : [];
 
 const initialState: CartState = {
-  cart: [],
+  cart: checkCart,
 };
 
 const cartSlice = createSlice({
@@ -26,15 +29,18 @@ const cartSlice = createSlice({
           return element;
         });
       }
+      localStorage.setItem("cart", JSON.stringify(state.cart));
     },
     deleteToCart: (state: CartState, action: PayloadAction<ProductItem>) => {
       const findItem = state.cart.find((item) => item.id === action.payload.id);
       if (findItem) {
         state.cart = state.cart.filter((item) => item.id !== action.payload.id);
       }
+      localStorage.setItem("cart", JSON.stringify(state.cart));
     },
     deleteAllToCart: (state: CartState) => {
       state.cart = [];
+      localStorage.setItem("cart", JSON.stringify(state.cart));
     },
 
     plusCount: (state: CartState, action) => {
@@ -44,6 +50,7 @@ const cartSlice = createSlice({
         }
         return element;
       });
+      localStorage.setItem("cart", JSON.stringify(state.cart));
     },
 
     minusCount: (state: CartState, action) => {
@@ -55,6 +62,7 @@ const cartSlice = createSlice({
         }
         return element;
       });
+      localStorage.setItem("cart", JSON.stringify(state.cart));
     },
   },
 });

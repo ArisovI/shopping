@@ -5,7 +5,6 @@ import { useAppSelector } from "../../hooks/hooks";
 const Recommendation = () => {
   const { products } = useAppSelector((state) => state.products);
   const randomNum = Math.floor(Math.random() * 10);
-  console.log(products[randomNum]);
 
   return (
     <Link to={`/product/${products[randomNum].id}`} className="recommendation">

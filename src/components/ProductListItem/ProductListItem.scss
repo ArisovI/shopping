@@ -1,9 +1,9 @@
 .product-list__item {
   width: 250px;
-  // height: 400px;
   box-shadow: 0 0 3px #333;
   border-radius: 4px;
-  @include flex(column, start, start);
+  display: flex;
+  flex-direction: column;
   padding: 20px;
   position: relative;
   transition: 0.5s;
@@ -13,13 +13,15 @@
     width: 100%;
     height: 200px;
     position: relative;
+
     img {
       width: 100%;
-      height: 200px;
+      height: 100%;
       transition: 0.5s;
       object-fit: cover;
       cursor: context-menu;
     }
+
     .aboutElement {
       @include pos-left(50%, 50%);
       transform: translate(-50%, -50%);
@@ -31,10 +33,12 @@
       transition: 0.5s;
     }
   }
+
   .favorite {
     @include pos-right(10px, 10px);
     z-index: 2;
     display: flex;
+
     svg {
       cursor: pointer;
       width: 30px;
@@ -42,31 +46,37 @@
       fill: black;
     }
   }
+
   .title {
     margin-top: 20px;
     text-align: center;
   }
+
   .price {
-    @include flex(row, space-between, center);
+    display: flex;
+    justify-content: space-between;
     width: 100%;
     margin-top: auto;
     margin-bottom: 10px;
+
     &-discont {
       font-size: 20px;
       color: $red;
       text-decoration: line-through;
     }
+
     &-without__discont {
       font-size: 22px;
     }
   }
+
   .btns {
     display: flex;
     width: 100%;
     margin-top: auto;
 
     button {
-      width: 100%;
+      flex: 1;
       height: 40px;
       padding: 0 10px;
       background: $red;
@@ -83,6 +93,7 @@
     transform: scale(1.2);
     border-radius: 4px;
   }
+
   &:hover .aboutElement {
     visibility: visible;
     opacity: 1;
@@ -91,14 +102,36 @@
   &:hover {
     box-shadow: 0 0 10px 5px #333;
   }
-}
-.snackBarCart {
-  @include pos-right(auto, 24px !important);
-  left: auto !important;
-}
 
-.snackBarAdmin{
-  @include pos-left(24px, 50% !important);
-  bottom: auto !important; 
-  transform: translate(-50%, 0);
+  @media (max-width: 906px){
+    // background: red;
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+
+    .img {
+      height: 200px;
+
+      img {
+        height: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    max-width: 250px;
+
+    .img {
+      height: 150px;
+
+      img {
+        height: 100%;
+      }
+    }
+  }
 }

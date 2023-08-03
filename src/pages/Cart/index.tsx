@@ -1,4 +1,4 @@
-import React from "react";
+  import React from "react";
 import Footer from "../../components/Footer";
 import NavLink from "../../components/NavLink";
 import { AiFillDelete, AiFillHeart } from "react-icons/ai";
@@ -13,14 +13,37 @@ import {
 import { ProductItem } from "../../types/types";
 import { addToFavorite } from "../../store/async/favoriteSlice";
 import { Link } from "react-router-dom";
+import { Snackbar, Alert } from "@mui/material";
 
 const Cart = () => {
   const { cart } = useAppSelector((state) => state.cart);
   const { favorites } = useAppSelector((state) => state.favorites);
   const dispatch = useAppDispatch();
+
+  //total price in cart
   const totalPrice = cart.reduce((acc, result) => {
     return (acc += result.price * result.count);
   }, 0);
+
+
+  //delete all items in cart
+  const [openDelete, setOpenDelete] = React.useState<boolean>(false);
+  const handleCloseDelete = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenDelete(false);
+  };
+  const deleteAllItems = () =>{
+    dispatch(deleteAllToCart())
+    setOpenDelete(true);
+      setTimeout(() => {
+        setOpenDelete(false);
+      }, 3000);
+  }
 
   return (
     <div className="cart">
@@ -29,7 +52,7 @@ const Cart = () => {
         <div className="cart-inner">
           <div className="cart-inner__title">
             <h2>Корзина</h2>
-            <MyButton onClick={() => dispatch(deleteAllToCart())}>
+            <MyButton onClick={deleteAllItems}>
               <AiFillDelete />
               <span>Удалить все товары</span>
             </MyButton>
@@ -87,7 +110,7 @@ const Cart = () => {
                   <h2>Ваша корзина</h2>
                   <ul>
                     {cart.map((element) => (
-                      <li>
+                      <li key={element.id}>
                         <span>{element.title}</span>
                         <div>
                           <span>Цена:</span>
@@ -105,7 +128,7 @@ const Cart = () => {
                       <span>Ваш платеж:</span>
                       <span>Цена: {totalPrice}</span>
                     </div>
-                    <MyButton>Покупать</MyButton>
+                    <Link to='/checkout'>Покупать</Link>
                   </div>
                 </div>
               </>
@@ -119,6 +142,21 @@ const Cart = () => {
         </div>
       </div>
       <Footer />
+
+      <Snackbar
+        open={openDelete}
+        autoHideDuration={10000}
+        onClose={handleCloseDelete}
+        className="snackBarCart"
+      >
+        <Alert
+          onClose={handleCloseDelete}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Вы удалили все товары 
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

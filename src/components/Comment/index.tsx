@@ -10,7 +10,7 @@ const Comment = () => {
   return (
     <div className="comment">
       <h2>Отзывы</h2>
-      <MyButton>Оставить отсыз</MyButton>
+      <MyButton>Оставить отзыв</MyButton>
       <ul>
         {commentsLimit.map((element) => (
           <CommentItem key={element.id} comments={element} />

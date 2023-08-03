@@ -13,7 +13,7 @@ const initialState = {
     avatar: "",
     email: "",
   },
-  };
+};
 
 const authSlice = createSlice({
   name: "auth",
@@ -43,7 +43,6 @@ const authSlice = createSlice({
         if (action.payload === 201 || action.payload === 200) {
           state.status = true;
         }
-        console.log(state.status);
       });
   },
 });
