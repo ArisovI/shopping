@@ -8,81 +8,46 @@ import { AiFillDelete, AiFillHeart, AiFillInfoCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { addToFavorite, deleteAll } from "../../store/async/favoriteSlice";
 import { addToCart } from "../../store/async/cartSlice";
-import { Snackbar, Alert } from "@mui/material";
+import { enqueueSnackbar } from "notistack";
 const Favorite = () => {
   const dispatch = useAppDispatch();
   const { favorites } = useAppSelector((state) => state.favorites);
   const { status } = useAppSelector((state) => state.auth);
+
+  //add to cart item
   const addCart = (favorite: ProductItem) => {
     if (status) {
       dispatch(addToCart(favorite));
-
-      setOpenCart(true);
-      setTimeout(() => {
-        setOpenCart(false);
-      }, 3000);
+      enqueueSnackbar("Вы добавили товар в корзину", { variant: "success" });
     }
-  };
-  const [openCart, setOpenCart] = React.useState<boolean>(false);
-  const handleCloseCart = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenCart(false);
   };
 
   //delete all items in cart
-  const [openDelete, setOpenDelete] = React.useState<boolean>(false);
-  const handleCloseDelete = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenDelete(false);
-  };
   const deleteAllItems = () => {
     dispatch(deleteAll());
-    setOpenDelete(true);
-    setTimeout(() => {
-      setOpenDelete(false);
-    }, 3000);
+    if (favorites.length) {
+      enqueueSnackbar("Вы удалили все товары из избранных", {
+        variant: "error",
+      });
+    } else {
+      enqueueSnackbar("Вы еще не добавили товар", { variant: "error" });
+    }
   };
+
+  //delete to favorite item
+  const deleteItem = (favorite: ProductItem) => {
+    dispatch(addToFavorite(favorite));
+    enqueueSnackbar("Вы удалили товар из избранных", { variant: "error" });
+  };
+
+  React.useEffect(() => {
+    if (!favorites.length) {
+      enqueueSnackbar("Вы еще не добавили товар", { variant: "error" });
+    }
+  }, []);
 
   return (
     <div className="favorite">
-      <Snackbar
-        open={openDelete}
-        autoHideDuration={10000}
-        onClose={handleCloseDelete}
-        className="snackBarCart"
-      >
-        <Alert
-          onClose={handleCloseDelete}
-          severity="success"
-          sx={{ width: "100%" }}
-        >
-          Вы удалили все товары
-        </Alert>
-      </Snackbar>
-      <Snackbar
-        open={openCart}
-        autoHideDuration={10000}
-        onClose={handleCloseCart}
-        className="snackBarCart"
-      >
-        <Alert
-          onClose={handleCloseCart}
-          severity="success"
-          sx={{ width: "100%" }}
-        >
-          Вы добавили товар в корзину
-        </Alert>
-      </Snackbar>
       <NavLink />
       <div className="container">
         <div className="favorite-inner">
@@ -112,7 +77,7 @@ const Favorite = () => {
                       Добавить в корзину
                     </MyButton>
                     <AiFillHeart
-                      onClick={() => dispatch(addToFavorite(favorite))}
+                      onClick={() => deleteItem(favorite)}
                       style={{ fill: favorite.favorites ? "red" : "black" }}
                     />
                     <Link to={`/product/${favorite.id}`}>

@@ -5,7 +5,7 @@ export type ProductItem = {
   description: string;
   images: string[];
   favorites: boolean;
-  count: number
+  count: number;
 };
 export type ProductState = {
   products: ProductItem[];
@@ -35,4 +35,18 @@ export type User = {
   creationAt?: string;
   updatedAt?: string;
   email: string;
+};
+
+export type GetUsersState = {
+  users: [];
+  isLoading: boolean;
+  isError: null | string;
+};
+
+export type Users = {
+  id: number;
+  email: string;
+  name: string;
+  role: string;
+  avatar: string;
 };

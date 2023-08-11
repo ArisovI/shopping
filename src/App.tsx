@@ -1,3 +1,4 @@
+import { enqueueSnackbar } from "notistack";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "./hooks/hooks";
@@ -18,6 +19,16 @@ const App = () => {
   React.useEffect(() => {
     dispatch(getComments());
     dispatch(getToken());
+
+    if (!status) {
+      enqueueSnackbar("Вы не авторизованы", {
+        variant: "error",
+      });
+    } else {
+      enqueueSnackbar("Вы авторизовались", {
+        variant: "success",
+      });
+    }
   }, [dispatch, status]);
 
   return (
@@ -29,7 +40,7 @@ const App = () => {
       <Route path="/product/:id" element={<ProductItem />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="*" element={<NotFound />} />
-      <Route path={status ? "/admin" : "/notadmin"} element={<Admin />} />
+      <Route path="/admin" element={<Admin />} />
     </Routes>
   );
 };

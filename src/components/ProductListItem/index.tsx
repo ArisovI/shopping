@@ -6,7 +6,13 @@ import MyButton from "../UI/button/MyButton";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { addToFavorite } from "../../store/async/favoriteSlice";
 import { addToCart } from "../../store/async/cartSlice";
-import { Snackbar, Alert } from "@mui/material";
+import { Snackbar, Alert, Button } from "@mui/material";
+import {
+  enqueueSnackbar,
+  useSnackbar,
+  VariantType,
+  SnackbarProvider,
+} from "notistack";
 interface IProductListItem {
   element: ProductItem;
 }
@@ -14,9 +20,8 @@ const ProductListItem: React.FC<IProductListItem> = ({ element }) => {
   const dispatch = useAppDispatch();
   const { favorites } = useAppSelector((state) => state.favorites);
   const { status } = useAppSelector((state) => state.auth);
-
+  const { enqueueSnackbar } = useSnackbar();
   const intervalRef = useRef<number>();
-
   const [isHover, setIsHover] = useState<boolean>(false);
   const [num, setNum] = useState<number>(0);
 
@@ -35,42 +40,6 @@ const ProductListItem: React.FC<IProductListItem> = ({ element }) => {
     setIsHover(false);
   };
 
-  //for snackbar
-  const [open, setOpen] = React.useState<boolean>(false);
-  const handleClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  };
-
-  //for snackbar
-  const [openCart, setOpenCart] = React.useState<boolean>(false);
-  const handleCloseCart = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenCart(false);
-  };
-
-  //for snackbar
-  const [openAdmin, setOpenAdmin] = useState(false);
-  const handleCloseAdmin = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenAdmin(false);
-  };
-
   //if this. true favorited or not and for snackbar alert
   const checkFavorite = favorites.find(
     (el: ProductItem) => el.id === element.id
@@ -80,37 +49,26 @@ const ProductListItem: React.FC<IProductListItem> = ({ element }) => {
   const addCart = () => {
     if (status) {
       dispatch(addToCart(element));
-
-      setOpenCart(true);
-      setTimeout(() => {
-        setOpenCart(false);
-      }, 3000);
+      enqueueSnackbar("Вы добавили товар в корзину", { variant: "success" });
+    } else {
+      enqueueSnackbar("Вы не авторизованы", { variant: "error" });
     }
   };
 
   //add to favorite this.
   const addFavorite = () => {
     dispatch(addToFavorite(element));
-
-    setOpen(true);
-    setTimeout(() => {
-      setOpen(false);
-    }, 3000);
-  };
-
-  React.useEffect(() => {
-    if (status) {
-      setOpenAdmin(true);
-      setTimeout(() => {
-        setOpenAdmin(false);
-      }, 3000);
+    if (checkFavorite) {
+      enqueueSnackbar("Вы удалили товар из избранных", { variant: "error" });
+    } else {
+      enqueueSnackbar("Вы добавили товар в избранные", { variant: "success" });
     }
-  }, [status]);
+  };
 
   return (
     <Fragment key={element.id}>
       <li className="product-list__item">
-        <span className="favorite" onClick={addFavorite}>
+        <span className="favorite" onClick={() => addFavorite()}>
           <AiFillHeart style={{ fill: checkFavorite ? "red" : "" }} />
         </span>
         <div className="img">
@@ -130,46 +88,9 @@ const ProductListItem: React.FC<IProductListItem> = ({ element }) => {
           <span className="price-without__discont">{element.price} $</span>
         </div>
         <div className="btns">
-          <MyButton onClick={addCart}>В корзину</MyButton>
+          <MyButton onClick={() => addCart()}>В корзину</MyButton>
         </div>
       </li>
-      <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-          {checkFavorite
-            ? "Вы добавили товар в избранные"
-            : "Вы удалили товар из избранных"}
-        </Alert>
-      </Snackbar>
-      <Snackbar
-        open={openCart}
-        autoHideDuration={10000}
-        onClose={handleCloseCart}
-        className="snackBarCart"
-      >
-        <Alert
-          onClose={handleCloseCart}
-          severity="success"
-          sx={{ width: "100%" }}
-        >
-          Вы добавили товар в корзину
-        </Alert>
-      </Snackbar>
-      {status && (
-        <Snackbar
-          open={openAdmin}
-          autoHideDuration={10000}
-          onClose={handleCloseAdmin}
-          className="snackBarAdmin"
-        >
-          <Alert
-            onClose={handleCloseAdmin}
-            severity="success"
-            sx={{ width: "100%" }}
-          >
-            Поздравляю вы авторизовались
-          </Alert>
-        </Snackbar>
-      )}
     </Fragment>
   );
 };

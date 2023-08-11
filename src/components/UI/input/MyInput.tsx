@@ -5,12 +5,14 @@ type IMyInputProps = {
   onChange?: (e: any) => void;
   value?: string | number;
   className?: string;
+  ref?:any;
 };
 const MyInput: React.FC<IMyInputProps> = ({
   type,
   placeholder,
   onChange,
   value,
+  ref,
   className,
 }) => {
   return (
@@ -20,6 +22,7 @@ const MyInput: React.FC<IMyInputProps> = ({
       onChange={onChange}
       value={value}
       className={className}
+      ref={ref}
     />
   );
 };

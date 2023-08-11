@@ -17,38 +17,42 @@ import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { AiFillDelete } from "react-icons/ai";
 import { deleteAllToCart, deleteToCart } from "../../store/async/cartSlice";
 import { useNavigate } from "react-router-dom";
+import { enqueueSnackbar } from "notistack";
+import { ProductItem } from "../../types/types";
 
 const Checkout = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { cart } = useAppSelector((state) => state.cart);
-  const totalPrice = cart.reduce((res, acc) => {
-    return (res += acc.count * acc.price);
-  }, 0);
-
-  const [value, setValue] = React.useState("1");
   const [isDelivery, setIsDelivery] = useState(false);
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
-  };
+
+  const totalPrice = React.useMemo(() => {
+    return cart.reduce((res, acc) => {
+      return (res += acc.count * acc.price);
+    }, 0);
+  }, [cart]);
 
   const handlePay = () => {
     if (cart.length) {
-      alert("You have made a purchase");
+      enqueueSnackbar("Поздравляю вы сделали покупку", { variant: "success" });
     }
     dispatch(deleteAllToCart());
 
     setTimeout(() => {
-      alert("Your basket is empty");
+      enqueueSnackbar("Ваша корзина пустая", { variant: "error" });
       navigate("/");
-    }, 1000);
+    }, 2000);
+  };
+
+  const deleteItemInCart = (cartItem: ProductItem) => {
+    dispatch(deleteToCart(cartItem));
+    enqueueSnackbar("Вы удалили товар из корзины", { variant: "error" });
   };
 
   return (
     <div className="checkout">
       <div className="checkout-inner">
         <h1>Checkout</h1>
-
         <ul className="checkout-order">
           {cart.map((cartItem) => (
             <li key={cartItem.id}>
@@ -60,7 +64,7 @@ const Checkout = () => {
                   x{cartItem.count} = {cartItem.price * cartItem.count} $
                 </span>
               </div>
-              <MyButton onClick={() => dispatch(deleteToCart(cartItem))}>
+              <MyButton onClick={() => deleteItemInCart(cartItem)}>
                 <AiFillDelete />
               </MyButton>
             </li>

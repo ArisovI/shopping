@@ -5,11 +5,14 @@
 //Pages
 @import "../pages/Home/Home.scss";
 @import "../pages/ProductItem/ProductItem.scss";
-@import '../pages/Auth/Auth.scss';
-@import '../pages/Favorite/Favorite.scss';
-@import '../pages/Cart/Cart.scss';
-@import '../pages/Checkout/Checkout.scss';
-@import '../pages/Admin/Admin.scss';
+@import "../pages/Auth/Auth.scss";
+@import "../pages/Favorite/Favorite.scss";
+@import "../pages/Cart/Cart.scss";
+@import "../pages/Checkout/Checkout.scss";
+@import "../pages/Admin/Admin.scss";
+
+//Admin
+@import "../components/Users/Users.scss";
 
 //Components
 @import "../components/NavLink/NavLink.scss";
@@ -18,8 +21,8 @@
 @import "../components/ProductList/ProductList.scss";
 @import "../components/ProductListItem/ProductListItem.scss";
 @import "../components/Footer/Footer.scss";
-@import '../components/Comment/Comment.scss';
-@import '../components/Comment/Comment.scss';
-@import '../components/CommentItem/CommentItem.scss';
-@import '../components/Recommendation/Recommendation.scss';
-@import '../components/Category/Category.scss';
+@import "../components/Comment/Comment.scss";
+@import "../components/Comment/Comment.scss";
+@import "../components/CommentItem/CommentItem.scss";
+@import "../components/Recommendation/Recommendation.scss";
+@import "../components/Category/Category.scss";

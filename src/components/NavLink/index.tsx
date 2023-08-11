@@ -1,3 +1,4 @@
+import { enqueueSnackbar } from "notistack";
 import React, { ChangeEvent, useState } from "react";
 import {
   FaPhone,
@@ -28,10 +29,13 @@ const NavLink = () => {
   const { info, status } = useAppSelector((state) => state.auth);
   const { favorites } = useAppSelector((state) => state.favorites);
   const { cart } = useAppSelector((state) => state.cart);
+
   const exit = () => {
     setUserExit(!userExit);
     dispatch(exitUser());
     dispatch(deleteAllToCart());
+
+    enqueueSnackbar("Вы вышли с аккаутна", { variant: "error" });
   };
 
   return (

@@ -1,4 +1,5 @@
 import { Snackbar, Alert } from "@mui/material";
+import { enqueueSnackbar } from "notistack";
 import React from "react";
 import {
   TbBrandInstagram,
@@ -26,22 +27,8 @@ const ProductItem = () => {
   const addCart = (item: ProductItemState) => {
     if (status) {
       dispatch(addToCart(item));
-
-      setOpenCart(true);
-      setTimeout(() => {
-        setOpenCart(false);
-      }, 3000);
+      enqueueSnackbar("Вы добавили товар в корзину", { variant: "success" });
     }
-  };
-  const [openCart, setOpenCart] = React.useState<boolean>(false);
-  const handleCloseCart = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenCart(false);
   };
 
   React.useEffect(() => {
@@ -119,20 +106,6 @@ const ProductItem = () => {
           </div>
         </div>
         <Footer />
-        <Snackbar
-          open={openCart}
-          autoHideDuration={10000}
-          onClose={handleCloseCart}
-          className="snackBarCart"
-        >
-          <Alert
-            onClose={handleCloseCart}
-            severity="success"
-            sx={{ width: "100%" }}
-          >
-            Вы добавили товар в корзину
-          </Alert>
-        </Snackbar>
       </div>
     );
   }

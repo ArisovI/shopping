@@ -1,4 +1,4 @@
-  import React from "react";
+import React from "react";
 import Footer from "../../components/Footer";
 import NavLink from "../../components/NavLink";
 import { AiFillDelete, AiFillHeart } from "react-icons/ai";
@@ -13,7 +13,7 @@ import {
 import { ProductItem } from "../../types/types";
 import { addToFavorite } from "../../store/async/favoriteSlice";
 import { Link } from "react-router-dom";
-import { Snackbar, Alert } from "@mui/material";
+import { enqueueSnackbar } from "notistack";
 
 const Cart = () => {
   const { cart } = useAppSelector((state) => state.cart);
@@ -25,25 +25,36 @@ const Cart = () => {
     return (acc += result.price * result.count);
   }, 0);
 
-
   //delete all items in cart
-  const [openDelete, setOpenDelete] = React.useState<boolean>(false);
-  const handleCloseDelete = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
+  const deleteAllItems = () => {
+    dispatch(deleteAllToCart());
+    if (cart.length) {
+      enqueueSnackbar("Вы удалили все товары из корзины", { variant: "error" });
+    } else {
+      enqueueSnackbar("Вы еще не добавляли товаров в корзину", {
+        variant: "error",
+      });
     }
-    setOpenDelete(false);
   };
-  const deleteAllItems = () =>{
-    dispatch(deleteAllToCart())
-    setOpenDelete(true);
-      setTimeout(() => {
-        setOpenDelete(false);
-      }, 3000);
-  }
+
+  const addToFavoriteBtn = (element: ProductItem) => {
+    dispatch(addToFavorite(element));
+
+    const checkFavorite = favorites.find(
+      (el: ProductItem) => el.id === element.id
+    );
+
+    if (checkFavorite) {
+      enqueueSnackbar("Вы удалили товар из избранных", { variant: "error" });
+    } else {
+      enqueueSnackbar("Вы добавили товар в избранные", { variant: "success" });
+    }
+  };
+
+  const deleteToCartItem = (element: ProductItem) => {
+    dispatch(deleteToCart(element));
+    enqueueSnackbar("Вы удалили товар из корзины", { variant: "error" });
+  };
 
   return (
     <div className="cart">
@@ -82,11 +93,11 @@ const Cart = () => {
                         </div>
                         <div className="products-btns">
                           <AiFillDelete
-                            onClick={() => dispatch(deleteToCart(element))}
+                            onClick={() => deleteToCartItem(element)}
                           />
                           <AiFillHeart
                             style={{ fill: isFavorited ? "red" : "" }}
-                            onClick={() => dispatch(addToFavorite(element))}
+                            onClick={() => addToFavoriteBtn(element)}
                           />
                         </div>
                         <div className="products-count">
@@ -128,7 +139,7 @@ const Cart = () => {
                       <span>Ваш платеж:</span>
                       <span>Цена: {totalPrice}</span>
                     </div>
-                    <Link to='/checkout'>Покупать</Link>
+                    <Link to="/checkout">Покупать</Link>
                   </div>
                 </div>
               </>
@@ -142,21 +153,6 @@ const Cart = () => {
         </div>
       </div>
       <Footer />
-
-      <Snackbar
-        open={openDelete}
-        autoHideDuration={10000}
-        onClose={handleCloseDelete}
-        className="snackBarCart"
-      >
-        <Alert
-          onClose={handleCloseDelete}
-          severity="success"
-          sx={{ width: "100%" }}
-        >
-          Вы удалили все товары 
-        </Alert>
-      </Snackbar>
     </div>
   );
 };

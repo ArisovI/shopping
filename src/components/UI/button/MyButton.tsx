@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 type IMyButtonProps = {
   children: ReactNode;
-  onClick?: () => any;
+  onClick?: (event?:any) => any;
 };
 const MyButton: React.FC<IMyButtonProps> = ({ children, onClick }) => {
   return (

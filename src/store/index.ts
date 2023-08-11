@@ -4,13 +4,15 @@ import commentReducer from "./async/commentSlice";
 import authReducer from "./async/authSlice";
 import favoriteReducer from "./async/favoriteSlice";
 import cartReducer from "./async/cartSlice";
+import usersReducer from "./async/userSlice";
 export const store = configureStore({
   reducer: {
     products: productsReducer,
     comments: commentReducer,
     auth: authReducer,
     favorites: favoriteReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    users: usersReducer,
   },
 });
 
